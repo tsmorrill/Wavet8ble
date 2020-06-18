@@ -1,0 +1,245 @@
+// Wavet8ble Synthesizer
+// v0.5
+//
+// MIDI Breath (cc2) crossfades between 10 user-defined waveforms
+//
+// Example using Adventure Kid's free waveforms:
+// https://github.com/KristofferKarlAxelEkstrand/AKWF-FREE
+
+#define $WAVE0 ./AKWF_0001/AKWF_0001.wav
+#define $WAVE1 ./AKWF_0001/AKWF_0002.wav
+#define $WAVE2 ./AKWF_0001/AKWF_0003.wav
+#define $WAVE3 ./AKWF_0001/AKWF_0004.wav
+#define $WAVE4 ./AKWF_0001/AKWF_0005.wav
+#define $WAVE5 ./AKWF_0001/AKWF_0006.wav
+#define $WAVE6 ./AKWF_0001/AKWF_0007.wav
+#define $WAVE7 ./AKWF_0001/AKWF_0008.wav
+
+<global>
+  // compensate for tuning
+  pitch_keycenter=d2
+  tune=-2
+
+  bend_down=-1200 bend_up=1200
+
+  amp_veltrack=0
+  off_mode=fast
+  ampeg_release_oncc104=2
+
+  // portamento code copied from sfzformat.com
+  eg06_sustain=1 // pitch envelope setup for legato slides
+  eg06_level0=-1 // envelope starts away from the note pitch
+  eg06_time0=0
+  eg06_pitch_oncc140=100 // this is the pitch depth
+  eg06_time1=0
+  eg06_level1=0 // at the end of the envelope, return to base pitch
+
+  // eg06_time1_oncc109 needs to be set for the legato regions - but we don't
+  // want it on for all regions so the default is 0
+  // At zero envelope duration the pitch goes to base pitch immediately so there
+  // is no glide
+
+<control>
+  label_cc2=Breath
+  label_cc104=Amp Release
+  label_cc109=Portamento
+
+<group> // wave 0 trigger
+  trigger=first
+  group=0
+  off_by=0
+
+  <region>
+    xfout_locc2=9
+    xfout_hicc2=16
+
+    sample=$WAVE0
+
+<group> // wave 0 legato
+  trigger=legato
+  group=0
+  off_by=0
+
+  <region>
+    xfout_locc2=9
+    xfout_hicc2=16
+
+    sample=$WAVE0
+
+<group> // wave 1 trigger
+  trigger=first
+  group=1
+  off_by=1
+
+  <region>
+    xfin_locc2=9
+    xfin_hicc2=16
+    xfout_locc2=26
+    xfout_hicc2=33
+
+    sample=$WAVE1
+
+<group> // wave 1 legato
+  trigger=legato
+  group=1
+  off_by=1
+
+  <region>
+    xfin_locc2=9
+    xfin_hicc2=16
+    xfout_locc2=26
+    xfout_hicc2=33
+
+    sample=$WAVE1
+
+<group> // wave 2 trigger
+  trigger=first
+  group=2
+  off_by=2
+
+  <region>
+    xfin_locc2=26
+    xfin_hicc2=33
+    xfout_locc2=43
+    xfout_hicc2=50
+
+    sample=$WAVE2
+
+<group> // wave 2 legato
+  trigger=legato
+  group=2
+  off_by=2
+
+  <region>
+    xfin_locc2=26
+    xfin_hicc2=33
+    xfout_locc2=43
+    xfout_hicc2=50
+
+    sample=$WAVE2
+
+<group> // wave 3 trigger
+  trigger=first
+  group=3
+  off_by=3
+
+  <region>
+    xfin_locc2=43
+    xfin_hicc2=50
+    xfout_locc2=60
+    xfout_hicc2=67
+
+    sample=$WAVE3
+
+<group> // wave 3 legato
+  trigger=legato
+  group=3
+  off_by=3
+
+  <region>
+    xfin_locc2=43
+    xfin_hicc2=50
+    xfout_locc2=60
+    xfout_hicc2=67
+
+    sample=$WAVE3
+
+<group> // wave 4 trigger
+  trigger=first
+  group=4
+  off_by=4
+
+  <region>
+    xfin_locc2=60
+    xfin_hicc2=67
+    xfout_locc2=77
+    xfout_hicc2=84
+
+    sample=$WAVE4
+
+<group> // wave 4 legato
+  trigger=legato
+  group=4
+  off_by=4
+
+  <region>
+    xfin_locc2=60
+    xfin_hicc2=67
+    xfout_locc2=77
+    xfout_hicc2=84
+
+    sample=$WAVE4
+
+<group> // wave 5 trigger
+  trigger=first
+  group=5
+  off_by=5
+
+  <region>
+    xfin_locc2=77
+    xfin_hicc2=84
+    xfout_locc2=94
+    xfout_hicc2=101
+
+    sample=$WAVE5
+
+<group> // wave 5 legato
+  trigger=legato
+  group=5
+  off_by=5
+
+  <region>
+    xfin_locc2=77
+    xfin_hicc2=84
+    xfout_locc2=94
+    xfout_hicc2=101
+
+    sample=$WAVE5
+
+<group> // wave 6 trigger
+  trigger=first
+  group=6
+  off_by=6
+
+  <region>
+    xfin_locc2=94
+    xfin_hicc2=101
+    xfout_locc2=111
+    xfout_hicc2=118
+
+    sample=$WAVE6
+
+<group> // wave 6 legato
+  trigger=legato
+  group=6
+  off_by=6
+
+  <region>
+    xfin_locc2=94
+    xfin_hicc2=101
+    xfout_locc2=111
+    xfout_hicc2=118
+
+    sample=$WAVE6
+
+<group> // wave 7 trigger
+  trigger=first
+  group=7
+  off_by=7
+
+  <region>
+    xfin_locc2=111
+    xfin_hicc2=118
+
+    sample=$WAVE7
+
+<group> // wave 7 legato
+  trigger=legato
+  group=7
+  off_by=7
+
+  <region>
+    xfin_locc2=111
+    xfin_hicc2=118
+
+    sample=$WAVE7
