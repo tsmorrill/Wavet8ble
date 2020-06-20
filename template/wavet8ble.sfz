@@ -15,6 +15,8 @@
 #define $WAVE7 path7
 
 <global>
+  loop_mode=loop_continuous
+
   bend_down=-1200 bend_up=1200
 
   amp_veltrack=0
